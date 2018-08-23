@@ -1,0 +1,2 @@
+#creation
+composer create-project laravel/laravel www
