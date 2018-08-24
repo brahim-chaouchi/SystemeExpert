@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "DefaultController@index")->name("index");
+Route::get('/question/nouveau', "QuestionController@nouveau")->name("question.nouveau");
+Route::post('/question/nouveau', "QuestionController@nouveau")->name("question.nouveau");
