@@ -7,9 +7,12 @@
     "require": {
         "php": ">=7.0.0",
         "almasaeed2010/adminlte": "2.2.0",
+        "driftyco/ionicons": "2.0.1",
         "fideloper/proxy": "~3.3",
+        "fortawesome/font-awesome": "4.7.0",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "twbs/bootstrap": "3.3.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
