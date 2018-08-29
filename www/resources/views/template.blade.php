@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Clash Royale - Board</title>
+    <title>Le Devin - Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -25,9 +25,9 @@
         <!-- Logo -->
         <a href="<?php echo route("index", Array(), false); ?>" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>CR</b> B</span>
+          <span class="logo-mini"><b>LD</b> B</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Clash Royale</b> Board</span>
+          <span class="logo-lg"><b>Le Devin</b> Board</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
