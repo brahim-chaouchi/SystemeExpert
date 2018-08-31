@@ -12,9 +12,9 @@ class QuestionController extends Controller
 	}
 	function new2(Request $argRequest)
 	{
-		$cardEntity = new \App\QuestionModel();
-		$cardEntity->Libelle = $argRequest->Libelle;
-		$cardEntity->save();
+        $questionEntity = new \App\QuestionModel();
+        $questionEntity->Libelle = $argRequest->Libelle;
+        $questionEntity->save();
 		return redirect()->route("question.list");
 	}
 	function list1()

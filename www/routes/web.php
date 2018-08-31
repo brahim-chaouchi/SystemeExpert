@@ -19,3 +19,10 @@ Route::get('/Question/view/{id}', "QuestionController@view")->name("question.vie
 Route::get('/Question/edit/{id}', "QuestionController@edit1")->name("question.edit1");
 Route::post('/Question/edit', "QuestionController@edit2")->name("question.edit2");
 Route::get('/Question/delete/{id}', "QuestionController@delete")->name("question.delete");
+Route::get('/Possibilite/new', "PossibiliteController@new1")->name("possibilite.new");
+Route::post('/Possibilite/new', "PossibiliteController@new2");
+Route::get('/Possibilite/list', "PossibiliteController@list1")->name("possibilite.list");
+Route::get('/Possibilite/view/{id}', "PossibiliteController@view")->name("possibilite.view");
+Route::get('/Possibilite/edit/{id}', "PossibiliteController@edit1")->name("possibilite.edit1");
+Route::post('/Possibilite/edit', "PossibiliteController@edit2")->name("possibilite.edit2");
+Route::get('/Possibilite/delete/{id}', "PossibiliteController@delete")->name("possibilite.delete");
