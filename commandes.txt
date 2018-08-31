@@ -1,2 +1,14 @@
 #creation
 composer create-project laravel/laravel www
+
+#creer une table
+php artisan make:migration create_table_card --create="Card"
+;editer le fichier dans database/migrations
+;;dans up supprimer
+;;;$table->timestamps();
+php artisan migrate
+;faire le modele
+;ajouter les vues
+;ajouter les controllers
+;ajouter les routes
+;ajouter liens dans menu

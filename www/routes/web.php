@@ -26,3 +26,10 @@ Route::get('/Possibilite/view/{id}', "PossibiliteController@view")->name("possib
 Route::get('/Possibilite/edit/{id}', "PossibiliteController@edit1")->name("possibilite.edit1");
 Route::post('/Possibilite/edit', "PossibiliteController@edit2")->name("possibilite.edit2");
 Route::get('/Possibilite/delete/{id}', "PossibiliteController@delete")->name("possibilite.delete");
+Route::get('/Reponse/new', "ReponseController@new1")->name("reponse.new");
+Route::post('/Reponse/new', "ReponseController@new2");
+Route::get('/Reponse/list', "ReponseController@list1")->name("reponse.list");
+Route::get('/Reponse/view/{id}', "ReponseController@view")->name("reponse.view");
+Route::get('/Reponse/edit/{id}', "ReponseController@edit1")->name("reponse.edit1");
+Route::post('/Reponse/edit', "ReponseController@edit2")->name("reponse.edit2");
+Route::get('/Reponse/delete/{id}', "ReponseController@delete")->name("reponse.delete");

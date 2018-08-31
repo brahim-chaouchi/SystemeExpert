@@ -26,3 +26,13 @@
                 <li><a href="<?php echo route("possibilite.list", Array(), false); ?>"><i class="fa {{$dot == "List" ? "fa-dot-circle-o" : "fa-circle-o"}}"></i> List</a></li>
               </ul>
             </li>
+            <li class="treeview {{$active == "Reponse" ? "active" : ""}}">
+              <a href="#">
+                <i class="fa fa-folder"></i> <span>Reponse</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="<?php echo route("reponse.new", Array(), false); ?>"><i class="fa {{$dot == "New" ? "fa-dot-circle-o" : "fa-circle-o"}}"></i> New</a></li>
+                <li><a href="<?php echo route("reponse.list", Array(), false); ?>"><i class="fa {{$dot == "List" ? "fa-dot-circle-o" : "fa-circle-o"}}"></i> List</a></li>
+              </ul>
+            </li>
