@@ -33,3 +33,10 @@ Route::get('/Reponse/view/{id}', "ReponseController@view")->name("reponse.view")
 Route::get('/Reponse/edit/{id}', "ReponseController@edit1")->name("reponse.edit1");
 Route::post('/Reponse/edit', "ReponseController@edit2")->name("reponse.edit2");
 Route::get('/Reponse/delete/{id}', "ReponseController@delete")->name("reponse.delete");
+Route::get('/Probleme/new', "ProblemeController@new1")->name("probleme.new");
+Route::post('/Probleme/new', "ProblemeController@new2");
+Route::get('/Probleme/list', "ProblemeController@list1")->name("probleme.list");
+Route::get('/Probleme/view/{id}', "ProblemeController@view")->name("probleme.view");
+Route::get('/Probleme/edit/{id}', "ProblemeController@edit1")->name("probleme.edit1");
+Route::post('/Probleme/edit', "ProblemeController@edit2")->name("probleme.edit2");
+Route::get('/Probleme/delete/{id}', "ProblemeController@delete")->name("probleme.delete");
