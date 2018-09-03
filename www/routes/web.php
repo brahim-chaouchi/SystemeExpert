@@ -40,3 +40,10 @@ Route::get('/Probleme/view/{id}', "ProblemeController@view")->name("probleme.vie
 Route::get('/Probleme/edit/{id}', "ProblemeController@edit1")->name("probleme.edit1");
 Route::post('/Probleme/edit', "ProblemeController@edit2")->name("probleme.edit2");
 Route::get('/Probleme/delete/{id}', "ProblemeController@delete")->name("probleme.delete");
+Route::get('/Resultat/new', "ResultatController@new1")->name("resultat.new");
+Route::post('/Resultat/new', "ResultatController@new2");
+Route::get('/Resultat/list', "ResultatController@list1")->name("resultat.list");
+Route::get('/Resultat/view/{id}', "ResultatController@view")->name("resultat.view");
+Route::get('/Resultat/edit/{id}', "ResultatController@edit1")->name("resultat.edit1");
+Route::post('/Resultat/edit', "ResultatController@edit2")->name("resultat.edit2");
+Route::get('/Resultat/delete/{id}', "ResultatController@delete")->name("resultat.delete");
