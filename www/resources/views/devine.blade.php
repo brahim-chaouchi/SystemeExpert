@@ -9,18 +9,20 @@
 
           <!-- Default box -->
           <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Deviner</h3>
-              <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <div class="box-body">
-              Premiere question : {{$id}}
-            </div><!-- /.box-body -->
-            <div class="box-footer">
-              Phase de recherche
-            </div><!-- /.box-footer-->
+                <form role="form" method="post">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="Texte">Question 1</label>
+                      <input type="text" class="form-control" id="Texte" placeholder="Texte" value="{{$question->Libelle}}" readonly>
+                    </div>
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    @foreach($question->hasMany(\App\ReponseModel::class, '_Question')->get() as $reponse)
+                      <button type="submit" class="btn btn-primary" name="reponse" value="{{$reponse->id}}">{{$reponse->belongsTo(\App\PossibiliteModel::class, '_Possibilite')->first()->Texte}}</button>
+                    @endforeach
+                  </div>
+                  {{csrf_field()}}
+                </form>
           </div><!-- /.box -->
 @endsection
