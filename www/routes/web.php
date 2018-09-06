@@ -11,7 +11,8 @@
 |
 */
 
-Route::any('/', "DefaultController@index")->name("index");
+Route::get('/', "DefaultController@indexGet")->name("index");
+Route::post('/', "DefaultController@indexPost");
 Route::get('/Question/new', "QuestionController@new1")->name("question.new");
 Route::post('/Question/new', "QuestionController@new2");
 Route::get('/Question/list', "QuestionController@list1")->name("question.list");
