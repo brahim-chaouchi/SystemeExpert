@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\ProblemeModel;
 use App\QuestionModel;
+use App\ResultatModel;
+use App\ReponseModel;
+use App\PossibiliteModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -11,18 +15,60 @@ class DefaultController extends Controller
 {
     public function indexGet(){
         Session::forget('reponse');
-        //prendre la question qui touche le plus de problemes
-        $questionId = DB::select(DB::raw('select Question.id, count(Probleme.id) as nb from Question join Reponse on Reponse._Question=Question.id join Resultat on Resultat._Reponse=Reponse.id join Probleme on Resultat._Probleme=Probleme.id group by Question.id order by nb,id'));
-        $question=QuestionModel::find($questionId[0]->id);
+        $resultatArray=[];
+        $problemeArray=[];
+        $questionArray=[];
+         /** @var ResultatModel $resultatEntity */
+        $resultatIterator=(new ResultatModel())->get();
+        foreach($resultatIterator as $resultatEntity){
+            $problemeEntity=$resultatEntity->belongsTo(ProblemeModel::class, '_Probleme')->first();
+            $reponseEntity=$resultatEntity->belongsTo(ReponseModel::class, '_Reponse')->first();
+            $questionEntity=$reponseEntity->belongsTo(QuestionModel::class, '_Question')->first();
+            $possibiliteEntity=$reponseEntity->belongsTo(PossibiliteModel::class, '_Possibilite')->first();
+            $resultatArray[$problemeEntity->id][$questionEntity->id]=$possibiliteEntity->id;
+            $problemeArray[$problemeEntity->id]=(isset($problemeArray[$problemeEntity->id])?$problemeArray[$problemeEntity->id]:0)+1;
+            $questionArray[$questionEntity->id]=(isset($questionArray[$questionEntity->id])?$questionArray[$questionEntity->id]:0)+1;
+        }
+        $questionId=0;
+        foreach($questionArray as $cle=>$valeur){
+            if($valeur>=2){
+                $questionId=$cle;
+                break;
+            }
+        }
+        $question=QuestionModel::find($questionId);
         return view('devine', compact('question'));
     }
 
     public function indexPost(Request $argRequest){
         Session::push('reponse', $argRequest->input('reponse'));
         $reponse=Session::get('reponse');
-        //prendre la question qui touche le plus de problemes
-        $questionId = DB::select(DB::raw('select Question.id, count(Probleme.id) as nb from Question join Reponse on Reponse._Question=Question.id join Resultat on Resultat._Reponse=Reponse.id join Probleme on Resultat._Probleme=Probleme.id group by Question.id order by nb,id'));
-        $question=QuestionModel::find($questionId[0]->id);
+        $resultatArray=[];
+        $problemeArray=[];
+        $questionArray=[];
+        /** @var ResultatModel $resultatEntity */
+        $resultatIterator=(new ResultatModel())->get();
+        foreach($resultatIterator as $resultatEntity){
+            $problemeEntity=$resultatEntity->belongsTo(ProblemeModel::class, '_Probleme')->first();
+            $reponseEntity=$resultatEntity->belongsTo(ReponseModel::class, '_Reponse')->first();
+            $questionEntity=$reponseEntity->belongsTo(QuestionModel::class, '_Question')->first();
+            $possibiliteEntity=$reponseEntity->belongsTo(PossibiliteModel::class, '_Possibilite')->first();
+            $resultatArray[$problemeEntity->id][$questionEntity->id]=$possibiliteEntity->id;
+            $problemeArray[$problemeEntity->id]=(isset($problemeArray[$problemeEntity->id])?$problemeArray[$problemeEntity->id]:0)+1;
+            $questionArray[$questionEntity->id]=(isset($questionArray[$questionEntity->id])?$questionArray[$questionEntity->id]:0)+1;
+        }
+        foreach($reponse as $reponseId){
+            $reponseEntity=(new Reponse)->find($reponseId);
+            //pas fini
+        }
+        $questionId=0;
+        foreach($questionArray as $cle=>$valeur){
+            if($valeur>=2){
+                $questionId=$cle;
+                break;
+            }
+        }
+        $question=QuestionModel::find($questionId);
         return view('devine', compact('question'));
     }
 }
