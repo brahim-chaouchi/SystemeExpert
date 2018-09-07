@@ -58,8 +58,16 @@ class DefaultController extends Controller
             $questionArray[$questionEntity->id]=(isset($questionArray[$questionEntity->id])?$questionArray[$questionEntity->id]:0)+1;
         }
         foreach($reponse as $reponseId){
-            $reponseEntity=(new Reponse)->find($reponseId);
-            //pas fini
+            $reponseEntity=(new ReponseModel)->find($reponseId);
+            $questionEntity=$reponseEntity->belongsTo(QuestionModel::class, '_Question')->first();
+            $possibiliteEntity=$reponseEntity->belongsTo(PossibiliteModel::class, '_Possibilite')->first();
+            $problemeIterator=(new ProblemeModel())->get();
+            foreach($problemeIterator as $problemeEntity){
+                if(isset($resultatArray[$problemeEntity->id][$questionEntity->id]) && $resultatArray[$problemeEntity->id][$questionEntity->id]!=$possibiliteEntity->id){
+                    $problemeArray[$problemeEntity->id]=0;
+                }
+            }
+            $questionArray[$questionEntity->id]=0;
         }
         $questionId=0;
         foreach($questionArray as $cle=>$valeur){
@@ -67,6 +75,24 @@ class DefaultController extends Controller
                 $questionId=$cle;
                 break;
             }
+        }
+        $problemeNb=0;
+        $problemeId=0;
+        foreach($problemeArray as $cle=>$valeur){
+            if($valeur!=0){
+                $problemeNb++;
+                $problemeId=$cle;
+            }
+        }
+        if($problemeNb==0){
+            return view('pastrouve');
+        }
+        if($problemeNb==1){
+            $probleme=ProblemeModel::find($problemeId);
+            return view('trouve', compact('probleme'));
+        }
+        if($questionId==0){
+            return view('seche');
         }
         $question=QuestionModel::find($questionId);
         return view('devine', compact('question'));

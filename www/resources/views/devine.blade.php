@@ -12,7 +12,7 @@
                 <form role="form" method="post">
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="Texte">Question 1</label>
+                      <label for="Texte">Question</label>
                       <input type="text" class="form-control" id="Texte" placeholder="Texte" value="{{$question->Libelle}}" readonly>
                     </div>
                   </div><!-- /.box-body -->
