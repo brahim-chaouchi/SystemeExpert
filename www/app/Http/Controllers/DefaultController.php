@@ -89,6 +89,7 @@ class DefaultController extends Controller
         }
         if($problemeNb==1){
             $probleme=ProblemeModel::find($problemeId);
+            Session::put('trouve', $problemeId);
             return view('trouve', compact('probleme'));
         }
         if($questionId==0){
@@ -96,5 +97,52 @@ class DefaultController extends Controller
         }
         $question=QuestionModel::find($questionId);
         return view('devine', compact('question'));
+    }
+
+    public function demandeGet(){
+        $problemeId=Session::get('trouve');
+        $probleme=ProblemeModel::find($problemeId);
+        return view('demande', compact('probleme'));
+    }
+
+    public function demandePost(Request $argRequest){
+        $problemeId=Session::get('trouve');
+        $probleme=ProblemeModel::find($problemeId);
+        $questionEntity=new QuestionModel();
+        $questionEntity->Libelle=$argRequest->input()["question"];
+        $questionEntity->save();
+        $possibilite1Entity=new PossibiliteModel();
+        $possibilite1Entity->Texte=$argRequest->input()["reponse1"];
+        $possibilite1Entity->save();
+        $possibilite2Entity=new PossibiliteModel();
+        $possibilite2Entity->Texte=$argRequest->input()["reponse2"];
+        $possibilite2Entity->save();
+        $reponse1Entity=new ReponseModel();
+        $reponse1Entity->_Question=$questionEntity->id;
+        $reponse1Entity->_Possibilite=$possibilite1Entity->id;
+        $reponse1Entity->save();
+        $reponse2Entity=new ReponseModel();
+        $reponse2Entity->_Question=$questionEntity->id;
+        $reponse2Entity->_Possibilite=$possibilite2Entity->id;
+        $reponse2Entity->save();
+        $problemeEntity=new ProblemeModel();
+        $problemeEntity->Intitule=$argRequest->input()["probleme"];
+        $problemeEntity->save();
+        $resultat1Entity=new ResultatModel();
+        $resultat1Entity->_Probleme=$problemeId;
+        $resultat1Entity->_Reponse=$reponse1Entity->id;
+        $resultat1Entity->save();
+        $resultat2Entity=new ResultatModel();
+        $resultat2Entity->_Probleme=$problemeEntity->id;
+        $resultat2Entity->_Reponse=$reponse2Entity->id;
+        $resultat2Entity->save();
+        $reponse=Session::get('reponse');
+        foreach($reponse as $cle=>$valeur){
+            $resultatEntity=new ResultatModel();
+            $resultatEntity->_Probleme=$problemeEntity->id;
+            $resultatEntity->_Reponse=$valeur;
+            $resultatEntity->save();
+        }
+        return view('merci');
     }
 }

@@ -12,16 +12,15 @@
               <!-- general form elements -->
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">View probleme #{{$probleme->id}}</h3>
+                  <h3 class="box-title">Merci</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div>
-                    {{$probleme->Intitule}}
+                    J'ai beaucoup appris !
                   </div>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                  <a href="<?php echo route("index"); ?>">C'est ça ! On recommence ?</a><br>
-                  <a href="<?php echo route("demande"); ?>">Pas du tout !</a>
+                  <a href="<?php echo route("index"); ?>">Recommencer</a>
                 </div><!-- /.box-header -->
               </div><!-- /.box -->
             </div><!--/.col -->

@@ -48,3 +48,5 @@ Route::get('/Resultat/view/{id}', "ResultatController@view")->name("resultat.vie
 Route::get('/Resultat/edit/{id}', "ResultatController@edit1")->name("resultat.edit1");
 Route::post('/Resultat/edit', "ResultatController@edit2")->name("resultat.edit2");
 Route::get('/Resultat/delete/{id}', "ResultatController@delete")->name("resultat.delete");
+Route::get('/demande', "DefaultController@demandeGet")->name("demande");
+Route::post('/demande', "DefaultController@demandePost");
