@@ -46,6 +46,7 @@ class DefaultController extends Controller
         $resultatArray=[];
         $problemeArray=[];
         $questionArray=[];
+        //remplit le tableau des resultats
         /** @var ResultatModel $resultatEntity */
         $resultatIterator=(new ResultatModel())->get();
         foreach($resultatIterator as $resultatEntity){
@@ -57,6 +58,7 @@ class DefaultController extends Controller
             $problemeArray[$problemeEntity->id]=(isset($problemeArray[$problemeEntity->id])?$problemeArray[$problemeEntity->id]:0)+1;
             $questionArray[$questionEntity->id]=(isset($questionArray[$questionEntity->id])?$questionArray[$questionEntity->id]:0)+1;
         }
+        //pour chaque reponse donnee, on garde les solutions compatibles
         foreach($reponse as $reponseId){
             $reponseEntity=(new ReponseModel)->find($reponseId);
             $questionEntity=$reponseEntity->belongsTo(QuestionModel::class, '_Question')->first();
@@ -69,6 +71,18 @@ class DefaultController extends Controller
             }
             $questionArray[$questionEntity->id]=0;
         }
+        //on recalcule la pertinence de chaque question
+        foreach($questionArray as $questionCle=>$questionValeur){
+            if($questionValeur!=0){
+                $questionArray[$questionCle]=0;
+                foreach($problemeArray as $problemeCle=>$problemeValeur){
+                    if($problemeValeur!=0 && isset($resultatArray[$problemeCle][$questionCle])){
+                        $questionArray[$questionCle]++;
+                    }
+                }
+            }
+        }
+        //on prend la premiere question qui touche au moins 2 problemes
         $questionId=0;
         foreach($questionArray as $cle=>$valeur){
             if($valeur>=2){
