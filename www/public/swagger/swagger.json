@@ -1,0 +1,49 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Systeme expert",
+        "version": "0.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Serveur local"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "welcome"
+                ],
+                "summary": "Page welcome",
+                "description": "Affiche la page d'accueil",
+                "operationId": "9a1fcb6838228d4c219920618151d5bd",
+                "responses": {
+                    "200": {
+                        "description": "Page affichée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "OK": {
+                                            "description": "0=ko, 1=ok",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "welcome",
+            "description": "welcome"
+        }
+    ]
+}
